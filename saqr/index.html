@@ -738,6 +738,7 @@
         </div>
     </div>
 
+    <script src="js/ads-config.js"></script>
     <script src="js/phone-ma.js"></script>
     <script src="js/orders-sheet.js"></script>
     <script>
@@ -843,23 +844,25 @@
 
                 const numItems = saqrGetQty(form);
 
-                if (typeof fbq !== 'undefined') {
-                    fbq('track', 'InitiateCheckout', {
-                        content_type: 'product',
-                        content_ids: [SAQR_CONTENT_ID],
-                        currency: SAQR_CURRENCY,
-                        value: SAQR_UNIT_PRICE * numItems,
-                        num_items: numItems
+                if (typeof prumyslSaqrAdsActive === 'function' && prumyslSaqrAdsActive()) {
+                    if (typeof fbq !== 'undefined') {
+                        fbq('track', 'InitiateCheckout', {
+                            content_type: 'product',
+                            content_ids: [SAQR_CONTENT_ID],
+                            currency: SAQR_CURRENCY,
+                            value: SAQR_UNIT_PRICE * numItems,
+                            num_items: numItems
+                        });
+                    }
+                    saqrTtqReady(function () {
+                        const p = saqrCheckoutPayload(form);
+                        ttq.track('InitiateCheckout', {
+                            contents: p.contents,
+                            value: p.value,
+                            currency: p.currency
+                        });
                     });
                 }
-                saqrTtqReady(function () {
-                    const p = saqrCheckoutPayload(form);
-                    ttq.track('InitiateCheckout', {
-                        contents: p.contents,
-                        value: p.value,
-                        currency: p.currency
-                    });
-                });
             });
         });
 
@@ -894,7 +897,7 @@
                     price: price
                 });
 
-                if (form.dataset.checkoutIntentTracked !== '1') {
+                if (form.dataset.checkoutIntentTracked !== '1' && typeof prumyslSaqrAdsActive === 'function' && prumyslSaqrAdsActive()) {
                     form.dataset.checkoutIntentTracked = '1';
                     const numItems = saqrGetQty(form);
                     if (typeof fbq !== 'undefined') {

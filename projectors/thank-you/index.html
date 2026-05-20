@@ -278,6 +278,7 @@
         <p class="copyright">&copy; 2026 Prumysl. جميع الحقوق محفوظة.</p>
     </footer>
 
+    <script src="../js/fbq-purchase.js"></script>
     <script>
         const MODELS = {
             '300w': { label: 'بروجيكتور شمسي 300 واط', contentId: 'PROJECTOR-300W', unit: 699, thumb: '../images/300W.webp', thumbFallback: 'https://slahmaid.github.io/ARVADIS/img/Projectors/300W.webp' },
@@ -353,14 +354,12 @@
             document.getElementById('waLink').href =
                 'https://api.whatsapp.com/send?phone=212723496854&text=' + waText;
 
-            if (typeof fbq !== 'undefined') {
-                fbq('track', 'Purchase', {
-                    content_type: 'product',
-                    content_ids: [pp.contentId],
-                    content_name: pp.contentName,
-                    currency: pp.currency,
+            if (typeof prumyslFbqPurchase === 'function') {
+                prumyslFbqPurchase({
+                    contentId: pp.contentId,
+                    contentName: pp.contentName,
                     value: pp.value,
-                    num_items: pp.numItems
+                    numItems: pp.numItems
                 });
             }
 

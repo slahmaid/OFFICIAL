@@ -130,6 +130,7 @@
         </div>
     </footer>
 
+    <script src="../js/fbq-purchase.js"></script>
     <script>
         const MOKA_CONTENT_ID = 'MOKA-4G-DUAL';
         const MOKA_UNIT_PRICE = 599;
@@ -155,14 +156,12 @@
             content_name: 'Prumysl كاميرا موكا'
         }];
 
-        if (typeof fbq !== 'undefined') {
-            fbq('track', 'Purchase', {
-                content_type: 'product',
-                content_ids: [MOKA_CONTENT_ID],
-                content_name: 'Prumysl كاميرا موكا',
-                currency: MOKA_CURRENCY,
+        if (typeof prumyslFbqPurchase === 'function') {
+            prumyslFbqPurchase({
+                contentId: MOKA_CONTENT_ID,
+                contentName: 'Prumysl كاميرا موكا',
                 value: orderValue,
-                num_items: numItems
+                numItems: numItems
             });
         }
 
