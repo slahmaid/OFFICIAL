@@ -277,7 +277,9 @@
     </footer>
 
     <script src="../js/ads-config.js"></script>
+    <script src="../js/order-conversion.js"></script>
     <script src="../js/fbq-purchase.js"></script>
+    <script src="../js/thank-you-conversion.js"></script>
     <script>
         const SAQR_UNIT = 1999;
         const MOKA_UNIT = 699;
@@ -403,45 +405,8 @@
             document.getElementById('waLink').href =
                 'https://api.whatsapp.com/send?phone=212723496854&text=' + waText;
 
-            const saqrAdsOn = typeof prumyslSaqrAdsActive === 'function' && prumyslSaqrAdsActive();
-            const trackPurchaseConversion = !meta.isSaqr || saqrAdsOn;
-
-            if (trackPurchaseConversion && typeof prumyslFbqPurchase === 'function') {
-                prumyslFbqPurchase({
-                    contentId: pp.contentId,
-                    contentName: pp.contentName,
-                    value: pp.value,
-                    numItems: pp.numItems
-                });
-            }
-
-            if (typeof ttq !== 'undefined' && typeof ttq.ready === 'function') {
-                ttq.ready(function () {
-                    if (!trackPurchaseConversion) return;
-
-                    try {
-                        const idRaw = sessionStorage.getItem('prumysl_ttq_ident');
-                        if (idRaw) {
-                            const o = JSON.parse(idRaw);
-                            ttq.identify({
-                                phone_number: o.phone_number,
-                                external_id: o.external_id
-                            });
-                            sessionStorage.removeItem('prumysl_ttq_ident');
-                        }
-                    } catch (_) {}
-
-                    const contents = [{ content_id: pp.contentId, content_type: 'product', content_name: pp.contentName }];
-                    const payload = { contents: contents, value: pp.value, currency: pp.currency };
-
-                    if (meta.isSaqr) {
-                        ttq.track('CompletePayment', payload);
-                    } else {
-                        ttq.track('ViewContent', payload);
-                        ttq.track('AddPaymentInfo', payload);
-                        ttq.track('Purchase', payload);
-                    }
-                });
+            if (typeof prumyslFireThankYouConversion === 'function') {
+                prumyslFireThankYouConversion({ meta: meta, pp: pp });
             }
         }
 

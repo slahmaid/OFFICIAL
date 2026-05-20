@@ -130,7 +130,10 @@
         </div>
     </footer>
 
+    <script src="../js/ads-config.js"></script>
+    <script src="../js/order-conversion.js"></script>
     <script src="../js/fbq-purchase.js"></script>
+    <script src="../js/thank-you-conversion.js"></script>
     <script>
         const MOKA_CONTENT_ID = 'MOKA-4G-DUAL';
         const MOKA_UNIT_PRICE = 599;
@@ -150,39 +153,16 @@
         document.getElementById('order-total').textContent = String(orderValue);
         document.getElementById('order-qty').textContent = String(numItems);
 
-        const ttqContents = [{
-            content_id: MOKA_CONTENT_ID,
-            content_type: 'product',
-            content_name: 'Prumysl كاميرا موكا'
-        }];
-
-        if (typeof prumyslFbqPurchase === 'function') {
-            prumyslFbqPurchase({
-                contentId: MOKA_CONTENT_ID,
-                contentName: 'Prumysl كاميرا موكا',
-                value: orderValue,
-                numItems: numItems
-            });
-        }
-
-        if (typeof ttq !== 'undefined' && typeof ttq.ready === 'function') {
-            ttq.ready(function () {
-                try {
-                    const idRaw = sessionStorage.getItem('prumysl_ttq_ident');
-                    if (idRaw) {
-                        const o = JSON.parse(idRaw);
-                        ttq.identify({
-                            phone_number: o.phone_number,
-                            external_id: o.external_id
-                        });
-                        sessionStorage.removeItem('prumysl_ttq_ident');
-                    }
-                } catch (_) {}
-                ttq.track('Purchase', {
-                    contents: ttqContents,
+        if (typeof prumyslFireThankYouConversion === 'function') {
+            prumyslFireThankYouConversion({
+                source: 'moka',
+                pp: {
+                    contentId: MOKA_CONTENT_ID,
+                    contentName: 'Prumysl كاميرا موكا',
                     value: orderValue,
+                    numItems: numItems,
                     currency: MOKA_CURRENCY
-                });
+                }
             });
         }
     </script>

@@ -1328,6 +1328,7 @@
         </div>
     </div>
 
+    <script src="js/order-conversion.js"></script>
     <script src="js/phone-ma.js"></script>
     <script src="js/orders-sheet.js"></script>
     <script>
@@ -1509,6 +1510,10 @@
                     quantity: qty,
                     price: orderPrice
                 });
+
+                if (typeof prumyslSetOrderPending === 'function') {
+                    prumyslSetOrderPending('moka-pro-max');
+                }
 
                 (function afterSheetSubmit() {
                         if (form.dataset.checkoutIntentTracked !== '1') {

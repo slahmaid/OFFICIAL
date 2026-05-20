@@ -651,6 +651,8 @@
         </div>
     </div>
 
+    <script src="js/ads-config.js"></script>
+    <script src="js/order-conversion.js"></script>
     <script src="js/phone-ma.js"></script>
     <script src="js/orders-sheet.js"></script>
     <script>
@@ -843,27 +845,29 @@
                 if (form.dataset.checkoutIntentTracked === '1') return;
                 form.dataset.checkoutIntentTracked = '1';
                 var p = projCheckoutPayload(form);
-                if (typeof fbq !== 'undefined') {
-                    fbq('track', 'InitiateCheckout', {
-                        content_type: 'product',
-                        content_ids: [p.contents[0].content_id],
-                        currency: PROJ_CURRENCY,
-                        value: p.value,
-                        num_items: p.numItems
+                if (typeof prumyslProjectorsAdsActive === 'function' && prumyslProjectorsAdsActive()) {
+                    if (typeof fbq !== 'undefined') {
+                        fbq('track', 'InitiateCheckout', {
+                            content_type: 'product',
+                            content_ids: [p.contents[0].content_id],
+                            currency: PROJ_CURRENCY,
+                            value: p.value,
+                            num_items: p.numItems
+                        });
+                    }
+                    projTtqReady(function () {
+                        ttq.track('InitiateCheckout', {
+                            contents: p.contents,
+                            value: p.value,
+                            currency: p.currency
+                        });
+                        ttq.track('AddToCart', {
+                            contents: p.contents,
+                            value: p.value,
+                            currency: p.currency
+                        });
                     });
                 }
-                projTtqReady(function () {
-                    ttq.track('InitiateCheckout', {
-                        contents: p.contents,
-                        value: p.value,
-                        currency: p.currency
-                    });
-                    ttq.track('AddToCart', {
-                        contents: p.contents,
-                        value: p.value,
-                        currency: p.currency
-                    });
-                });
             });
         });
 
@@ -905,7 +909,7 @@
                     price: price
                 });
 
-                if (form.dataset.checkoutIntentTracked !== '1') {
+                if (form.dataset.checkoutIntentTracked !== '1' && typeof prumyslProjectorsAdsActive === 'function' && prumyslProjectorsAdsActive()) {
                     form.dataset.checkoutIntentTracked = '1';
                     var pSubmit = projCheckoutPayload(form);
                     if (typeof fbq !== 'undefined') {
@@ -919,6 +923,9 @@
                     }
                 }
 
+                if (typeof prumyslSetOrderPending === 'function') {
+                    prumyslSetOrderPending('projectors');
+                }
                 window.location.href = redirectUrl;
             });
         });

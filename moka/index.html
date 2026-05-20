@@ -1411,6 +1411,7 @@
         </div>
     </div>
 
+    <script src="js/order-conversion.js"></script>
     <script src="js/phone-ma.js"></script>
     <script src="js/orders-sheet.js"></script>
     <script>
@@ -1591,6 +1592,10 @@
                     quantity: quantity,
                     price: price
                 });
+
+                if (typeof prumyslSetOrderPending === 'function') {
+                    prumyslSetOrderPending('moka');
+                }
 
                 if (form.dataset.checkoutIntentTracked !== '1') {
                     form.dataset.checkoutIntentTracked = '1';
