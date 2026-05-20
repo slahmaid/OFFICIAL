@@ -1,0 +1,10 @@
+# https://prumysl.cc/robots.txt
+User-agent: *
+Allow: /
+
+# Private / conversion pages — not for search results
+Disallow: /admin/
+Disallow: /*/thank-you/
+Disallow: /*/redirect.html
+
+Sitemap: https://prumysl.cc/sitemap.xml

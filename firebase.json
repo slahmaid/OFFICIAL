@@ -12,6 +12,13 @@
       "google-apps-script/**",
       "build-bundles.ps1"
     ],
+    "redirects": [
+      { "source": "/img/logo.svg", "destination": "/images/logo.svg", "type": 301 },
+      { "source": "/img/moka/:file", "destination": "/moka/images/:file", "type": 301 },
+      { "source": "/img/saqr/:file", "destination": "/saqr/images/:file", "type": 301 },
+      { "source": "/img/projectors/:file", "destination": "/projectors/images/:file", "type": 301 },
+      { "source": "/img/:file", "destination": "/moka-pro-max/images/:file", "type": 301 }
+    ],
     "rewrites": [
       { "source": "/admin", "destination": "/admin/index.html" },
       { "source": "/admin/**", "destination": "/admin/index.html" }
