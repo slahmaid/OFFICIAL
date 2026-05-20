@@ -31,6 +31,7 @@ function Write-BundleHtml($content, $dest) {
     $jsDir = Join-Path $out "$_\js"
     if (-not (Test-Path $jsDir)) { New-Item -ItemType Directory -Force -Path $jsDir | Out-Null }
     Copy-IfExists (Join-Path $out "js\orders-sheet.js") (Join-Path $jsDir "orders-sheet.js")
+    Copy-IfExists (Join-Path $out "js\landing-perf.js") (Join-Path $jsDir "landing-perf.js")
 }
 
 $saqrImg = Join-Path $out "saqr\images"

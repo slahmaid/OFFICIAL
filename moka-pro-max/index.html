@@ -43,9 +43,12 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="preload" href="css/style.css" as="style">
+    <link rel="preload" href="css/desktop-landing.css" as="style">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/desktop-landing.css">
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap"></noscript>
 
     <script type="application/ld+json">
     {
@@ -85,22 +88,6 @@
     <noscript><img height="1" width="1" style="display:none"
     src="https://www.facebook.com/tr?id=740114099139411&ev=PageView&noscript=1"
     /></noscript>
-
-    <!-- TikTok Pixel Code Start -->
-    <script>
-    !function (w, d, t) {
-      w.TiktokAnalyticsObject=t;var ttq=w[t]=w[t]||[];ttq.methods=["page","track","identify","instances","debug","on","off","once","ready","alias","group","enableCookie","disableCookie","holdConsent","revokeConsent","grantConsent"],ttq.setAndDefer=function(t,e){t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}};for(var i=0;i<ttq.methods.length;i++)ttq.setAndDefer(ttq,ttq.methods[i]);ttq.instance=function(t){for(
-    var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n]);return e},ttq.load=function(e,n){var r="https://analytics.tiktok.com/i18n/pixel/events.js",o=n&&n.partner;ttq._i=ttq._i||{},ttq._i[e]=[],ttq._i[e]._u=r,ttq._t=ttq._t||{},ttq._t[e]=+new Date,ttq._o=ttq._o||{},ttq._o[e]=n||{};n=document.createElement("script")
-    ;n.type="text/javascript",n.async=!0,n.src=r+"?sdkid="+e+"&lib="+t;e=document.getElementsByTagName("script")[0];e.parentNode.insertBefore(n,e)};
-
-
-      ttq.load('D81OHIBC77UDUGTVF380');
-      ttq.ready(function () {
-        ttq.page();
-      });
-    }(window, document, 'ttq');
-    </script>
-    <!-- TikTok Pixel Code End -->
 
     <style>
         :root {
@@ -1006,7 +993,7 @@
         <a href="#order" aria-label="الانتقال إلى نموذج الطلب">
             <picture>
                 <source media="(max-width: 767px)" srcset="images/Hero-mobile.jpeg">
-                <img src="images/Hero.jpeg" alt="كاميرا Prumysl موكا برو ماكس الشمسية بثلاث عدسات وزووم 10X — المغرب" width="900" height="600" fetchpriority="high" decoding="async">
+                <img src="images/Hero.jpeg" alt="كاميرا Prumysl موكا برو ماكس الشمسية بثلاث عدسات وزووم 10X — المغرب" width="900" height="600" sizes="(max-width: 767px) 100vw, 900px" fetchpriority="high" decoding="async">
             </picture>
         </a>
     </section>
@@ -1083,13 +1070,13 @@
                 </div>
 
                 <div class="feature-box">
-                    <div class="feature-img"><img src="images/F-3.gif" alt="زووم بصري 10× على كاميرا مراقبة شمسية موكا برو ماكس"></div>
+                    <div class="feature-img"><img src="images/F-3.gif" alt="زووم بصري 10× على كاميرا مراقبة شمسية موكا برو ماكس" loading="lazy" decoding="async" width="400" height="400"></div>
                     <h3>زووم 10X بصري</h3>
                     <p>عدسة مخصصة للزووم البصري: تقريب قوي بلا تشويش وبوضوح عالي.</p>
                 </div>
 
                 <div class="feature-box">
-                    <div class="feature-img"><img src="images/F-4.gif" alt="رؤية ليلية ملونة — كاميرا أمان خارجية ليلاً"></div>
+                    <div class="feature-img"><img src="images/F-4.gif" alt="رؤية ليلية ملونة — كاميرا أمان خارجية ليلاً" loading="lazy" decoding="async" width="400" height="400"></div>
                     <h3>رؤية ليلية ملونة</h3>
                     <p>مشاهدة واضحة تماماً في الظلام بالألوان الطبيعية.</p>
                 </div>
@@ -1328,9 +1315,10 @@
         </div>
     </div>
 
-    <script src="js/phone-ma.js"></script>
-    <script src="js/orders-sheet.js"></script>
-    <script>
+    <script src="js/landing-perf.js"></script>
+    <script src="js/phone-ma.js" defer></script>
+    <script src="js/orders-sheet.js" defer></script>
+    <script defer>
         const MOKA_TTQ_CONTENT_ID = 'MOKA-PRO-MAX';
         const MOKA_TTQ_CONTENT_NAME = 'Prumysl موكا برو ماكس';
         const MOKA_TTQ_UNIT = 699;
@@ -1396,26 +1384,19 @@
             setInterval(tick, 1000);
         })();
 
-        // Sticky Mobile CTA Scroll behavior
-        (function(){
-            const cta = document.getElementById('mobileCta');
-            const btn = document.getElementById('goToOrder');
-            const order = document.getElementById('order');
-            if(!cta || !btn || !order) return;
-
-            const isSmall = () => window.matchMedia('(max-width: 480px)').matches;
-
-            btn.addEventListener('click', () => {
-                order.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        if (window.prumyslLandingPerf) {
+            prumyslLandingPerf.initLazyImageFade();
+            prumyslLandingPerf.initMobileOrderCta({});
+            prumyslLandingPerf.deferThirdParty(function () {
+                !function (w, d, t) {
+                  w.TiktokAnalyticsObject=t;var ttq=w[t]=w[t]||[];ttq.methods=["page","track","identify","instances","debug","on","off","once","ready","alias","group","enableCookie","disableCookie","holdConsent","revokeConsent","grantConsent"],ttq.setAndDefer=function(t,e){t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}};for(var i=0;i<ttq.methods.length;i++)ttq.setAndDefer(ttq,ttq.methods[i]);ttq.instance=function(t){for(
+                var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n]);return e},ttq.load=function(e,n){var r="https://analytics.tiktok.com/i18n/pixel/events.js",o=n&&n.partner;ttq._i=ttq._i||{},ttq._i[e]=[],ttq._i[e]._u=r,ttq._t=ttq._t||{},ttq._t[e]=+new Date,ttq._o=ttq._o||{},ttq._o[e]=n||{};n=document.createElement("script")
+                ;n.type="text/javascript",n.async=!0,n.src=r+"?sdkid="+e+"&lib="+t;e=document.getElementsByTagName("script")[0];e.parentNode.insertBefore(n,e)};
+                  ttq.load('D81OHIBC77UDUGTVF380');
+                  ttq.ready(function () { ttq.page(); });
+                }(window, document, 'ttq');
             });
-
-            window.addEventListener('scroll', () => {
-                if(!isSmall()) { cta.style.display = 'none'; return; }
-                const rect = order.getBoundingClientRect();
-                const inView = rect.top < window.innerHeight && rect.bottom > 0;
-                cta.style.display = inView ? 'none' : 'block';
-            });
-        })();
+        }
 
         // Meta Pixel: every click on call / WhatsApp between header and hero (totals in Events Manager → Custom events)
         (function () {

@@ -1,6 +1,9 @@
+.firebase/
 .DS_Store
 Thumbs.db
 desktop.ini
 *.log
 .env
 .env.*
+*.orig.jpeg
+*.orig.jpg
