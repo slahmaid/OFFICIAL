@@ -1,0 +1,33 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /orders/{orderId} {
+      allow create: if isValidOrderCreate();
+      allow read, update, delete: if request.auth != null;
+    }
+  }
+}
+
+function isValidOrderCreate() {
+  let data = request.resource.data;
+  return data.keys().hasAll(['name', 'city', 'phone', 'product', 'quantity', 'status', 'source'])
+    && data.name is string
+    && data.name.size() > 0
+    && data.name.size() <= 120
+    && data.city is string
+    && data.city.size() <= 80
+    && data.phone is string
+    && data.phone.size() >= 10
+    && data.phone.size() <= 15
+    && data.product is string
+    && data.product.size() > 0
+    && data.product.size() <= 200
+    && data.quantity is int
+    && data.quantity >= 1
+    && data.quantity <= 99
+    && data.status == 'new'
+    && data.source is string
+    && data.source.size() <= 40
+    && (!('price' in data) || data.price == null || data.price is number)
+    && (!('notes' in data) || data.notes == '');
+}
