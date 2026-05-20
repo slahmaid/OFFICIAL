@@ -17,8 +17,7 @@
     <link rel="alternate" hreflang="ar" href="https://prumysl.cc/saqr/">
     <link rel="alternate" hreflang="x-default" href="https://prumysl.cc/saqr/">
 
-    <link rel="preload" href="images/Saqr-mobile.jpeg" as="image" media="(max-width: 767px)" fetchpriority="high">
-    <link rel="preload" href="images/Saqr.jpeg" as="image" media="(min-width: 768px)" fetchpriority="high">
+    <link rel="preload" href="images/Saqr.jpeg" as="image" fetchpriority="high">
 
     <meta property="og:title" content="كاميرا الصقر | Prumysl — زووم 36× و24MP و4G شمسية">
     <meta property="og:description" content="أقوى كاميرا شمسية للمسافات البعيدة: زووم بصري 36×، 24MP، لوحان 20W وبطارية 12000mAh. توصيل مجاني والدفع عند الاستلام.">
@@ -40,12 +39,9 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preload" href="css/style.css" as="style">
-    <link rel="preload" href="css/desktop-landing.css" as="style">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/desktop-landing.css">
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap"></noscript>
 
     <script type="application/ld+json">
     {
@@ -81,6 +77,22 @@
     <noscript><img height="1" width="1" style="display:none"
     src="https://www.facebook.com/tr?id=740114099139411&ev=PageView&noscript=1"
     /></noscript>
+
+    <!-- TikTok Pixel Code Start -->
+    <script>
+    !function (w, d, t) {
+      w.TiktokAnalyticsObject=t;var ttq=w[t]=w[t]||[];ttq.methods=["page","track","identify","instances","debug","on","off","once","ready","alias","group","enableCookie","disableCookie","holdConsent","revokeConsent","grantConsent"],ttq.setAndDefer=function(t,e){t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}};for(var i=0;i<ttq.methods.length;i++)ttq.setAndDefer(ttq,ttq.methods[i]);ttq.instance=function(t){for(
+    var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n]);return e},ttq.load=function(e,n){var r="https://analytics.tiktok.com/i18n/pixel/events.js",o=n&&n.partner;ttq._i=ttq._i||{},ttq._i[e]=[],ttq._i[e]._u=r,ttq._t=ttq._t||{},ttq._t[e]=+new Date,ttq._o=ttq._o||{},ttq._o[e]=n||{};n=document.createElement("script")
+    ;n.type="text/javascript",n.async=!0,n.src=r+"?sdkid="+e+"&lib="+t;e=document.getElementsByTagName("script")[0];e.parentNode.insertBefore(n,e)};
+
+
+      ttq.load('D81OHIBC77UDUGTVF380');
+      ttq.ready(function () {
+        ttq.page();
+      });
+    }(window, document, 'ttq');
+    </script>
+    <!-- TikTok Pixel Code End -->
 
     <style>
         :root {
@@ -412,10 +424,7 @@
     <div class="desktop-fold">
         <section class="hero-section">
             <a href="#order" aria-label="الانتقال إلى نموذج الطلب">
-                <picture>
-                    <source media="(max-width: 767px)" srcset="images/Saqr-mobile.jpeg">
-                    <img src="images/Saqr.jpeg" alt="كاميرا Prumysl الصقر الشمسية — زووم بصري 36× و24MP" width="900" height="600" sizes="(max-width: 767px) 100vw, 900px" fetchpriority="high" decoding="async">
-                </picture>
+                <img src="images/Saqr.jpeg" alt="كاميرا Prumysl الصقر الشمسية — زووم بصري 36× و24MP" width="900" height="600" fetchpriority="high" decoding="async">
             </a>
         </section>
 
@@ -488,7 +497,7 @@
 
                 <div class="features-grid">
                     <div class="feature-box">
-                        <div class="feature-img feature-img--gif"><img src="images/zoom.gif" alt="زووم بصري 36× حقيقي على كاميرا الصقر" width="400" height="400" loading="lazy" decoding="async"></div>
+                        <div class="feature-img feature-img--gif"><img src="images/zoom.gif" alt="زووم بصري 36× حقيقي على كاميرا الصقر" width="400" height="400" decoding="async"></div>
                         <h3>زووم بصري 36× حقيقي</h3>
                         <p>عدسة PTZ بتقريب <b>36 مرة بصرياً</b> — تقرأ لوحات السيارات وتتعرف على الوجوه من مسافات بعيدة بلا تشويش.</p>
                     </div>
@@ -729,10 +738,9 @@
         </div>
     </div>
 
-    <script src="js/landing-perf.js"></script>
-    <script src="js/phone-ma.js" defer></script>
-    <script src="js/orders-sheet.js" defer></script>
-    <script defer>
+    <script src="js/phone-ma.js"></script>
+    <script src="js/orders-sheet.js"></script>
+    <script>
         const SAQR_CONTENT_ID = 'SAQR-36X-4G';
         const SAQR_UNIT_PRICE = 1999;
         const SAQR_CURRENCY = 'MAD';
@@ -806,19 +814,20 @@
             setInterval(tick, 1000);
         })();
 
-        if (window.prumyslLandingPerf) {
-            prumyslLandingPerf.initLazyImageFade();
-            prumyslLandingPerf.initMobileOrderCta({});
-            prumyslLandingPerf.deferThirdParty(function () {
-                !function (w, d, t) {
-                  w.TiktokAnalyticsObject=t;var ttq=w[t]=w[t]||[];ttq.methods=["page","track","identify","instances","debug","on","off","once","ready","alias","group","enableCookie","disableCookie","holdConsent","revokeConsent","grantConsent"],ttq.setAndDefer=function(t,e){t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}};for(var i=0;i<ttq.methods.length;i++)ttq.setAndDefer(ttq,ttq.methods[i]);ttq.instance=function(t){for(
-                var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n]);return e},ttq.load=function(e,n){var r="https://analytics.tiktok.com/i18n/pixel/events.js",o=n&&n.partner;ttq._i=ttq._i||{},ttq._i[e]=[],ttq._i[e]._u=r,ttq._t=ttq._t||{},ttq._t[e]=+new Date,ttq._o=ttq._o||{},ttq._o[e]=n||{};n=document.createElement("script")
-                ;n.type="text/javascript",n.async=!0,n.src=r+"?sdkid="+e+"&lib="+t;e=document.getElementsByTagName("script")[0];e.parentNode.insertBefore(n,e)};
-                  ttq.load('D81OHIBC77UDUGTVF380');
-                  ttq.ready(function () { ttq.page(); });
-                }(window, document, 'ttq');
+        (function () {
+            const cta = document.getElementById('mobileCta');
+            const btn = document.getElementById('goToOrder');
+            const order = document.getElementById('order');
+            if (!cta || !btn || !order) return;
+            const isSmall = () => window.matchMedia('(max-width: 480px)').matches;
+            btn.addEventListener('click', () => order.scrollIntoView({ behavior: 'smooth', block: 'start' }));
+            window.addEventListener('scroll', () => {
+                if (!isSmall()) { cta.style.display = 'none'; return; }
+                const rect = order.getBoundingClientRect();
+                const inView = rect.top < window.innerHeight && rect.bottom > 0;
+                cta.style.display = inView ? 'none' : 'block';
             });
-        }
+        })();
 
         prumyslMaPhone.bind();
 
