@@ -1500,7 +1500,7 @@
                 const connection = formData.get('connection_type');
                 const qty = product === '2_camera' ? 2 : 1;
                 const orderPrice = 699 * qty;
-                const redirectUrl = `thank-you/?name=${encodeURIComponent(name)}&product=${encodeURIComponent(product)}&connection=${encodeURIComponent(connection)}&quantity=${qty}&price=${orderPrice}`;
+                const redirectUrl = `thank-you/?ordered=1&name=${encodeURIComponent(name)}&product=${encodeURIComponent(product)}&connection=${encodeURIComponent(connection)}&quantity=${qty}&price=${orderPrice}`;
 
                 submitOrderToSheet({
                     name: name,

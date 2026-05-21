@@ -1,5 +1,6 @@
 /**
- * Shared thank-you conversion tracking: real order + campaign on + single Purchase/CompletePayment.
+ * Thank-you conversion: real order only. Meta Purchase + TikTok Purchase/CompletePayment.
+ * Campaign toggles apply on landing pages (InitiateCheckout), not here.
  */
 (function (global) {
     var CURRENCY = 'MAD';
@@ -14,21 +15,16 @@
         return null;
     }
 
-    function adsActiveForSource(source) {
-        var ads = global.PRUMYSL_ADS;
-        if (!ads || !source) return false;
-        if (source === 'saqr') return !!ads.saqrActive;
-        if (source === 'projectors') return !!ads.projectorsActive;
-        if (source === 'moka') return !!ads.mokaActive;
-        if (source === 'moka-pro-max') return !!ads.mokaProMaxActive;
-        return false;
+    function normalizeValue(v) {
+        var n = typeof v === 'number' ? v : parseInt(String(v || '').replace(/\D/g, ''), 10);
+        return Number.isFinite(n) && n > 0 ? n : null;
     }
 
     global.prumyslThankYouSourceFromMeta = orderSourceFromMeta;
 
     global.prumyslShouldTrackThankYou = function (source) {
-        if (!source || typeof global.prumyslConsumeOrderPending !== 'function') return false;
-        return global.prumyslConsumeOrderPending(source) && adsActiveForSource(source);
+        if (!source || typeof global.prumyslThankYouOrderConfirmed !== 'function') return false;
+        return global.prumyslThankYouOrderConfirmed(source);
     };
 
     function runTtq(fn) {
@@ -49,24 +45,24 @@
         });
     }
 
-    /**
-     * @param {{ source?: string, meta?: object, pp: object, isSaqr?: boolean }} opts
-     */
     global.prumyslFireThankYouConversion = function (opts) {
         if (!opts || !opts.pp) return;
         var source = opts.source || orderSourceFromMeta(opts.meta);
         if (!global.prumyslShouldTrackThankYou(source)) return;
 
-        var pp = opts.pp;
+        var value = normalizeValue(opts.pp.value);
+        if (value == null) return;
+
+        var pp = {
+            contentId: opts.pp.contentId,
+            contentName: opts.pp.contentName,
+            value: value,
+            numItems: Math.max(1, parseInt(opts.pp.numItems, 10) || 1)
+        };
         var isSaqr = !!opts.isSaqr || !!(opts.meta && opts.meta.isSaqr);
 
         if (typeof global.prumyslFbqPurchase === 'function') {
-            global.prumyslFbqPurchase({
-                contentId: pp.contentId,
-                contentName: pp.contentName,
-                value: pp.value,
-                numItems: pp.numItems
-            });
+            global.prumyslFbqPurchase(pp);
         }
 
         runTtq(function () {

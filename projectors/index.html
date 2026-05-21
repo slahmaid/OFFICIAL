@@ -894,7 +894,7 @@
                 var model = formData.get('model') || '300w';
                 var quantity = formData.get('quantity') || '1';
                 var price = formData.get('price') || '699';
-                var redirectUrl = 'thank-you/?name=' + encodeURIComponent(name) +
+                var redirectUrl = 'thank-you/?ordered=1&name=' + encodeURIComponent(name) +
                     '&model=' + encodeURIComponent(model) +
                     '&quantity=' + encodeURIComponent(quantity) +
                     '&price=' + encodeURIComponent(price);
